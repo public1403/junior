@@ -1,4 +1,5 @@
 #!/bin/bash
 
+PRE="/var/www/html/"
 
-cat /Users/zhou/Git/HideByPixel/base.html /Users/zhou/Git/HideByPixel/commtheory/sub.html > /Users/zhou/Git/HideByPixel/index.html
+cat ../base.html ../commtheory/sub.html ../tail.html > ../index.html
