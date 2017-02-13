@@ -3,6 +3,7 @@
 
 from os import listdir
 from os.path import isfile, join
+import os
 
 
 head = """
@@ -26,13 +27,23 @@ tail = """
 </div>
 """
 
+def trans_size(filename):
+    byts = os.path.getsize(filename)
+    if byts <= 1024:
+        return str(byts) + "B"
+    elif byts <= 1024*1024:
+        return str("%.1f" % (byts/1024.) ) + "KB"
+    else:
+        return str("%.1f" % (byts/1024./1024.) ) + "MB"
+ 
+
 def getmiddle():
-    left = '<button id="zz" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" style="width:100%"><a style="color:#E0F7FA; text-decoration:none" href="./'
+    left = '<button id="zz" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" style="width:100%"><a style="color:#E0F7FA; text-decoration:none" href="./DIP/'
     right = '</a></button>'
     center = ''
     for filename in listdir("."):
         if filename.endswith(".zip") or filename.endswith(".ppt") or filename.endswith(".pptx"):
-            center += left + filename + '">' + filename + right + '\n'
+            center += left + filename + '">' + filename +' '+ trans_size(filename) + right + '\n'
     return center
 
 
